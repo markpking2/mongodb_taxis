@@ -20,7 +20,7 @@ afterAll((done) => {
     mongoose.disconnect(done);
 });
 
-describe("company tests", () => {
+describe("taxi tests", () => {
     test("reading subdocuments", async () => {
         let taxi = new Taxi();
         taxi.brand = "Toyota";

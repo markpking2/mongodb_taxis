@@ -8,10 +8,19 @@ const OwnerSchema = new Schema({
 });
 
 const TaxiSchema = new Schema({
-    brand: { type: String, required: true },
+    brand: { type: String, required: [true, "Brand is required."] },
     model: { type: String, required: true },
-    year: { type: Number, required: true },
-    owner: OwnerSchema
+    year: {
+        type: Number,
+        required: true,
+        validate: {
+            validator: (value) => {
+                return /^[0-9]{4}$/.test(value);
+            },
+            message: (props) => `${props.value} is not a valid year!`,
+        },
+    },
+    owner: OwnerSchema,
 });
 
 module.exports = mongoose.model("taxi", TaxiSchema);
