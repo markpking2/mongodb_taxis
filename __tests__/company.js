@@ -1,5 +1,5 @@
 const mongoose = require("mongoose");
-const Company = require("../models/company");
+const Company = require("../models/Company");
 
 let company;
 
@@ -33,21 +33,21 @@ describe("company tests", () => {
     test("read company", async () => {
         const readCompany = await Company.findById(company.id);
         expect(readCompany.name).toBe(company.name);
-    })
+    });
 
     test("update company", async () => {
         await Company.updateOne({ _id: company.id }, { name: "Updated name" });
         const readCompany = await Company.findById(company.id);
-        expect(readCompany.name).toBe('Updated name')
-    })
+        expect(readCompany.name).toBe("Updated name");
+    });
 
-    test('delete company', async () => {
+    test("delete company", async () => {
         const count = await Company.countDocuments();
-        expect(count).toBe(1)
+        expect(count).toBe(1);
 
-        await Company.deleteOne({ _id: company.id })
+        await Company.deleteOne({ _id: company.id });
 
         const newCount = await Company.countDocuments();
         expect(newCount).toBe(0);
-    })
+    });
 });
